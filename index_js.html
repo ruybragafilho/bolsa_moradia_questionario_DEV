@@ -1,0 +1,39 @@
+<script>
+
+  "use strict";
+
+
+
+  /**
+   * Inicializa os sistema ao carregar a página index.html
+   */
+  document.addEventListener( 'DOMContentLoaded', () => {
+
+    console.log( "\nindex_js - INÍCIO" );      
+
+    document.getElementById("contato_sim").style.display = "none";   
+    document.getElementById("contato_nao").style.display = "none";   
+
+    console.log( "index_js - FIM" );                  
+
+  }); // Fim do document.addEventListener
+
+  
+  function handlerContatoCidadao() {
+    
+  }
+
+
+  function contatoSim() {
+    document.getElementById("contato_sim").style.display = "";   
+    document.getElementById("contato_nao").style.display = "none";   
+  }
+
+
+  function contatoNao() {
+    document.getElementById("contato_sim").style.display = "none";   
+    document.getElementById("contato_nao").style.display = "";       
+  }  
+
+
+</script>
