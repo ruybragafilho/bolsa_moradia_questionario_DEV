@@ -22,85 +22,89 @@
 
   <body>
 
-
-
-
     <!-- Conteúdo Principal - Início -->
     <div id="conteudo">
 
       <!-- Main - Parte principal da tela de questionário - Início -->
       <main class="container">    
     
-        <!-- Título da Página -->
+        <!-- Título da Página - Início -->
         <section>
           <h3 class="text-center fw-bold mt-4 mb-5" id="tituloPagina">BOLSA MORADIA - POP RUA</h3><br>
-          <h4 class="text-center mb-5">Questionário</h4>
+          <h4 class="text-center mb-5">QUESTIONÁRIO</h4>          
         </section>
+        <!-- Título da Página - Fim -->
 
-        <!-- Questionário -->
+
+        <br><hr><br>
+
+
+        <!-- Questionário - Início -->
         <section>    
 
           <!-- Pergunta principal do questionário -->  
-          <p id="label_contato_cidadao" class="fw-bold mt-5">O serviço tem contato com a pessoa convocada?</p>    
-          <div id="checkbox_contato_cidadao" onchange="handlerContatoCidadao()">
-            <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "checkbox_contato_cidadao", 2 ); ?>
-          </div>
+          <div id="contato_cidadao" class="mt-5">
+            <p id="label_contato_cidadao" class="fw-bold">O serviço tem contato com a pessoa convocada?</p>    
+            <div id="radio_contato_cidadao" onchange="handlerChangeRadioContatoCidadao()">
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "radio_contato_cidadao", 1 ); ?>
+            </div>
+          </div> 
 
-          <!-- Perguntas caso a resposta da pergunta principal seja SIM -->  
-          <div id="contato_sim" >
+          
+          <!-- Outras perguntas -->
 
-            <p id="label_orientacao_cidadao" class="fw-bold mt-5">A pessoa já está orientada sobre a convocação?</p>    
-            <div id="checkbox_orientacao_cidadao">
-              <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "checkbox_orientacao_cidadao", 2 ); ?>
+          <div id="orientacao_cidadao" class="mt-5">
+            <p id="label_orientacao_cidadao" class="fw-bold">A pessoa já está orientada sobre a convocação?</p>    
+            <div id="radio_orientacao_cidadao" onchange="handlerChangeRadioOrientacaoCidadao()">
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "radio_orientacao_cidadao", 1 ); ?>
             </div>        
-  
-            <p id="label_procurando_imovel" class="fw-bold mt-5">A pessoa já está procutando imóvel?</p>    
-            <div id="checkbox_procurando_imovel">
-              <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "checkbox_procurando_imovel", 2 ); ?>
+          </div>
+
+          <div id="procurando_imovel" class="mt-5">
+            <p id="label_procurando_imovel" class="fw-bold">A pessoa já está procutando imóvel?</p>    
+            <div id="radio_procurando_imovel" onchange="handlerChangeRadioProcurandoImovel()">
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "radio_procurando_imovel", 1 ); ?>
             </div>
+          </div>
   
+          <div id="instruir_cidadao" class="mt-5">
             <p id="label_instruir_cidadao" class="fw-bold mt-5">Você sabe instruir a pessoa sobre as próximas ações necessárias?</p>    
-            <div id="checkbox_instruir_cidadao">
-              <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "checkbox_instruir_cidadao", 2 ); ?>
+            <div id="radio_instruir_cidadao" onchange="handlerChangeRadioInstruirCidadao()">
+              <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "radio_instruir_cidadao", 1 ); ?>
             </div>
-  
-            <div class="mt-5">
-              <p><b>Instruções</b></p>
-            </div>
-
+          </div>
+    
+          <div id="instrucoes"  class="mt-5">
+            <p><b>Instruções</b></p>
           </div>
 
-          <!-- Perguntas caso a resposta da pergunta principal seja NÃO -->  
-          <div id="contato_nao">
-
-            <p id="label_motivos_nao_informacao" class="fw-bold mt-5">Por qual motivo a pessoa não foi informada?</p>    
-            <div id="checkbox_motivos_nao_informacao">
-              <?!= gerarCheckBox( BUFFER_RESPOSTAS_SIMPLES, "checkbox_motivos_nao_informacao", 2 ); ?>
+          <div id="motivos_nao_contato" class="mt-5">
+            <p id="label_motivos_nao_contato" class="fw-bold mt-5">Por qual motivo não há contato?</p>    
+            <div id="radio_motivos_nao_contato">
+              <?!= gerarRadioButton( BUFFER_MOTIVOS_NAO_CONTATO, "radio_motivos_nao_contato", 0 ); ?>
             </div>          
-
-          </div>
+          </div>      
 
           <!-- Observações -->
-          <div class="mt-5">
-            <label for="observacoes" class="form-label fw-bold">OBSERVAÇÕES</label>
-            <textarea class="form-control" id="observacoes" rows="3" maxlength="512"></textarea>
-          </div>      
-          
+          <div id="observacoes" class="mt-5">
+            <label for="campo_observacoes" class="form-label fw-bold">OBSERVAÇÕES</label>
+            <textarea class="form-control" id="campo_observacoes" rows="3" maxlength="512"></textarea>
+          </div>                
     
         </section>
+        <!-- Questionário - Fim -->
 
       </main>
+      <!-- Main - Parte principal da tela de questionário - Início -->
 
     </div>
     <!-- Conteúdo Principal - Fim -->    
 
 
 
-
-
     <!-- Chamadas de script -->    
-
     <?!= include("index_js"); ?>
+
      
   </body>
 </html>

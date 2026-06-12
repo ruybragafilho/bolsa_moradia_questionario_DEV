@@ -11,29 +11,138 @@
 
     console.log( "\nindex_js - INÍCIO" );      
 
-    document.getElementById("contato_sim").style.display = "none";   
-    document.getElementById("contato_nao").style.display = "none";   
+    document.getElementById("orientacao_cidadao").style.display   =  "none";   
+    document.getElementById("motivos_nao_contato").style.display  =  "none";   
+
+    document.getElementById("procurando_imovel").style.display    =  "none";  
+    document.getElementById("instruir_cidadao").style.display     =  "none";   
+    document.getElementById("instrucoes").style.display           =  "none";       
+
+    document.getElementById("observacoes").style.display          =  "none";           
 
     console.log( "index_js - FIM" );                  
 
   }); // Fim do document.addEventListener
 
+
+
+
+  /**
+   * Mostra e esconde campos em função da opção selecionada no campo radio_contato_cidadao
+   */
+  function handlerChangeRadioContatoCidadao() {
+
+    const valorRadio = document.querySelector('input[name="radio_contato_cidadao"]:checked').value;
+
+    switch( valorRadio ) {
+
+      case "1": // NÃO
+
+                document.getElementById("orientacao_cidadao").style.display  =  "none";                  
+                document.getElementsByName('radio_orientacao_cidadao').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("motivos_nao_contato").style.display  =  "";                   
+
+                document.getElementById("procurando_imovel").style.display  =  "none";  
+                document.getElementsByName('radio_procurando_imovel').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("instruir_cidadao").style.display  =  "none";   
+                document.getElementsByName('radio_instruir_cidadao').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("instrucoes").style.display  =  "none";    
+
+                document.getElementById("observacoes").style.display  =  "";           
+                break; 
+
+      case "2": // SIM
+
+                document.getElementById("orientacao_cidadao").style.display   =  "";  
+
+                document.getElementById("motivos_nao_contato").style.display  =  "none";  
+                document.getElementsByName('radio_motivos_nao_contato').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("procurando_imovel").style.display  =  "none";  
+                document.getElementsByName('radio_procurando_imovel').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("instruir_cidadao").style.display  =  "none";                   
+                document.getElementsByName('radio_instruir_cidadao').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("instrucoes").style.display  =  "none";  
+
+                document.getElementById("observacoes").style.display  =  "none";           
+                break;
+    }
+
+  } // Fim da função handlerChangeRadioContatoCidadao
+
+
   
-  function handlerContatoCidadao() {
-    
-  }
+  /**
+   * Mostra e esconde campos em função da opção selecionada no campo radio_orientacao_cidadao
+   */
+  function handlerChangeRadioOrientacaoCidadao() {
+
+    const valorRadio = document.querySelector('input[name="radio_orientacao_cidadao"]:checked').value;
+
+    switch( valorRadio ) {
+
+      case "1": // NÃO
+                document.getElementById("procurando_imovel").style.display    =  "none";  
+                document.getElementById("instruir_cidadao").style.display     =  "";   
+                document.getElementById("instrucoes").style.display           =  "none";                       
+
+                document.getElementById("observacoes").style.display          =  "none";           
+                break; 
+
+      case "2": // SIM
+                document.getElementById("procurando_imovel").style.display    =  "";  
+                document.getElementById("instruir_cidadao").style.display     =  "none";   
+                document.getElementById("instrucoes").style.display           =  "none";   
+
+                document.getElementById("observacoes").style.display          =  "none";           
+                break;
+    }
+
+  } // Fim da função handlerChangeRadioOrientacaoCidadao
 
 
-  function contatoSim() {
-    document.getElementById("contato_sim").style.display = "";   
-    document.getElementById("contato_nao").style.display = "none";   
-  }
+  
+  /**
+   * Mostra e esconde campos em função da opção selecionada no campo procurando_imovel
+   */
+  function handlerChangeRadioProcurandoImovel() {
+
+    document.getElementById("observacoes").style.display  =  "";           
+
+  } // Fim da função handlerChangeRadioProcurandoImovel
 
 
-  function contatoNao() {
-    document.getElementById("contato_sim").style.display = "none";   
-    document.getElementById("contato_nao").style.display = "";       
-  }  
+  
+  /**
+   * Mostra e esconde campos em função da opção selecionada no campo radio_instruir_cidadao
+   */
+  function handlerChangeRadioInstruirCidadao() {
+
+    const valorRadio = document.querySelector('input[name="radio_instruir_cidadao"]:checked').value;
+
+    switch( valorRadio ) {
+
+      case "1": // NÃO
+
+                document.getElementById("instrucoes").style.display  =  "";                       
+                break; 
+
+      case "2": // SIM
+                document.getElementById("instrucoes").style.display  =  "none";           
+                break;
+    }
+
+    document.getElementById("observacoes").style.display  =  "";           
+
+  } // Fim da função handlerChangeRadioInstruirCidadao
+
+
+
 
 
 </script>
