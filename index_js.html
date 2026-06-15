@@ -88,6 +88,8 @@
 
       case "1": // NÃO
                 document.getElementById("procurando_imovel").style.display    =  "none";  
+                document.getElementsByName('radio_procurando_imovel').forEach( opcao => {opcao.checked = false;} );
+
                 document.getElementById("instruir_cidadao").style.display     =  "";   
                 document.getElementById("instrucoes").style.display           =  "none";                       
 
@@ -96,7 +98,8 @@
 
       case "2": // SIM
                 document.getElementById("procurando_imovel").style.display    =  "";  
-                document.getElementById("instruir_cidadao").style.display     =  "none";   
+                document.getElementById("instruir_cidadao").style.display     =  "none";  
+                document.getElementsByName('radio_instruir_cidadao').forEach( opcao => {opcao.checked = false;} ); 
                 document.getElementById("instrucoes").style.display           =  "none";   
 
                 document.getElementById("observacoes").style.display          =  "none";           
