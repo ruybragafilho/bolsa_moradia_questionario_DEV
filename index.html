@@ -54,10 +54,24 @@
           <!-- Acompanhamento SIM -->
           <div id="acompanhamento_sim" class="mt-5">
             <p id="label_acompanhamento_sim" class="fw-bold">Em qual etapa de acesso o beneficiário se encontra?</p>    
-            <div id="radio_acompanhamento_sim">
+            <div id="radio_acompanhamento_sim" onchange="handlerChangeRadio_acompanhamento_sim()">
               <?!= gerarRadioButton( BUFFER_ACOMPANHAMENTO_SIM, "radio_acompanhamento_sim", 0 ); ?>
             </div>        
           </div>
+
+          <div id="impossibilidade_temporaria" class="mt-3">
+            <p id="label_impossibilidade_temporaria" class="fw-bold">Justificativa impossibilidade temporária</p>    
+            <div id="radio_impossibilidade_temporaria">
+              <?!= gerarRadioButton( BUFFER_IMPOSSIBILIDADE_TEMPORARIA, "radio_impossibilidade_temporaria", 0 ); ?>
+            </div>        
+          </div>          
+
+          <div id="nao_acesso_definitivo" class="mt-3">
+            <p id="label_nao_acesso_definitivo" class="fw-bold">Justificativa não acesso definitivo</p>    
+            <div id="radio_nao_acesso_definitivo">
+              <?!= gerarRadioButton( BUFFER_NAO_ACESSO_DEFINITIVO, "radio_nao_acesso_definitivo", 0 ); ?>
+            </div>        
+          </div>                    
 
 
           <!-- Acompanhamento NÃO -->
@@ -68,9 +82,9 @@
             </div>        
           </div>          
 
-          
+
           <!-- Observações -->
-          <div id="observacoes" class="mt-5">
+          <div id="observacoes" class="mt-5 mb-5">
             <label for="campo_observacoes" class="form-label fw-bold">OBSERVAÇÕES</label>
             <textarea class="form-control" id="campo_observacoes" rows="3" maxlength="512"></textarea>
           </div>                
@@ -84,10 +98,13 @@
 
         <!-- Botão Salvar Questionário - Início -->        
         <section>
-          <button type="button" class="btn btn-primary">Salvar Questionário</button>
+          <button type="button" class="btn btn-primary mt-5 mb-5">Salvar Questionário</button>
         </section>
         <!-- Botão Salvar Questionário - Fim -->        
         
+
+        <br>
+
 
       </main>
       <!-- Main - Parte principal da tela de questionário - Início -->

@@ -11,14 +11,15 @@
 
     console.log( "\nindex_js - INÍCIO" );      
 
-    document.getElementById("acompanhamento_sim").style.display  =  "none";   
-    document.getElementById("acompanhamento_nao").style.display  =  "none";   
-    document.getElementById("observacoes").style.display         =  "none";           
+    document.getElementById("acompanhamento_sim").style.display          =  "none";   
+    document.getElementById("acompanhamento_nao").style.display          =  "none";   
+    document.getElementById("impossibilidade_temporaria").style.display  =  "none";                   
+    document.getElementById("nao_acesso_definitivo").style.display       =  "none";                  
+    document.getElementById("observacoes").style.display                 =  "none";           
 
     console.log( "index_js - FIM" );                  
 
   }); // Fim do document.addEventListener
-
 
 
 
@@ -33,19 +34,29 @@
 
       case "1": // NÃO
 
+                // Esconde campos referentes à opção SIM
                 document.getElementById("acompanhamento_sim").style.display  =  "none";                  
-                document.getElementsByName('radio_acompanhamento_sim').forEach( opcao => {opcao.checked = false;} );
+                document.getElementsByName("radio_acompanhamento_sim").forEach( opcao => {opcao.checked = false;} );
 
+                document.getElementById("impossibilidade_temporaria").style.display  =  "none";                  
+                document.getElementsByName("radio_impossibilidade_temporaria").forEach( opcao => {opcao.checked = false;} );                
+
+                document.getElementById("nao_acesso_definitivo").style.display  =  "none";                  
+                document.getElementsByName("radio_nao_acesso_definitivo").forEach( opcao => {opcao.checked = false;} );                
+
+                // Mostra campo referente à opção NÃO
                 document.getElementById("acompanhamento_nao").style.display  =  "";                   
 
                 break; 
 
       case "2": // SIM
 
-                document.getElementById("acompanhamento_nao").style.display  =  "none";                  
-                document.getElementsByName('radio_acompanhamento_nao').forEach( opcao => {opcao.checked = false;} );
-
+                // Mostra campos referentes à opção SIM
                 document.getElementById("acompanhamento_sim").style.display  =  "";                   
+
+                // Esconde campo referente à opção Não
+                document.getElementById("acompanhamento_nao").style.display  =  "none";                  
+                document.getElementsByName("radio_acompanhamento_nao").forEach( opcao => {opcao.checked = false;} );
        
                 break;
     }
@@ -56,6 +67,51 @@
 
 
 
+  /**
+   * Mostra e esconde campos em função da opção selecionada no campo radio_acompanhamento_sim
+   */     
+  function handlerChangeRadio_acompanhamento_sim() {
+
+    const valorRadio = document.querySelector('input[name="radio_acompanhamento_sim"]:checked').value;            
+
+    switch( valorRadio ) {
+
+      case "5": // O beneficiário está impossibilitado de acessar temporariamente
+
+                // Mostra campo referente à impossibilidade
+                document.getElementById("impossibilidade_temporaria").style.display  =  "";                   
+
+                // Esconde campo referente ao não acesso definitivo
+                document.getElementById("nao_acesso_definitivo").style.display  =  "none";                  
+                document.getElementsByName("radio_nao_acesso_definitivo").forEach( opcao => {opcao.checked = false;} );
+
+                break; 
+
+      case "6": // O beneficiário não acessará o benefício de forma definitiva
+
+                // Esconde campo referente à impossibilidade
+                document.getElementById("impossibilidade_temporaria").style.display  =  "none";                   
+                document.getElementsByName("radio_impossibilidade_temporaria").forEach( opcao => {opcao.checked = false;} );
+
+                // Mostra campo referente ao não acesso definitivo
+                document.getElementById("nao_acesso_definitivo").style.display  =  "";                                  
+       
+                break;
+
+      default:  // Outras opções                
+
+                // Esconde campo referente à impossibilidade
+                document.getElementById("impossibilidade_temporaria").style.display  =  "none";                   
+                document.getElementsByName("radio_impossibilidade_temporaria").forEach( opcao => {opcao.checked = false;} );      
+
+                // Esconde campo referente ao não acesso definitivo
+                document.getElementById("nao_acesso_definitivo").style.display  =  "none";                  
+                document.getElementsByName("radio_nao_acesso_definitivo").forEach( opcao => {opcao.checked = false;} );
+                
+                break;
+    }
+
+  } // Fim da função handlerChangeRadio_acompanhamento_sim
 
 
 </script>
