@@ -11,14 +11,9 @@
 
     console.log( "\nindex_js - INÍCIO" );      
 
-    document.getElementById("orientacao_cidadao").style.display   =  "none";   
-    document.getElementById("motivos_nao_contato").style.display  =  "none";   
-
-    document.getElementById("procurando_imovel").style.display    =  "none";  
-    document.getElementById("instruir_cidadao").style.display     =  "none";   
-    document.getElementById("instrucoes").style.display           =  "none";       
-
-    document.getElementById("observacoes").style.display          =  "none";           
+    document.getElementById("acompanhamento_sim").style.display  =  "none";   
+    document.getElementById("acompanhamento_nao").style.display  =  "none";   
+    document.getElementById("observacoes").style.display         =  "none";           
 
     console.log( "index_js - FIM" );                  
 
@@ -28,121 +23,36 @@
 
 
   /**
-   * Mostra e esconde campos em função da opção selecionada no campo radio_contato_cidadao
-   */
-  function handlerChangeRadioContatoCidadao() {
+   * Mostra e esconde campos em função da opção selecionada no campo radio_acompanhamento_beneficiario
+   */   
+  function handlerChangeRadio_acompanhamento_beneficiario() {
 
-    const valorRadio = document.querySelector('input[name="radio_contato_cidadao"]:checked').value;
-
-    switch( valorRadio ) {
-
-      case "1": // NÃO
-
-                document.getElementById("orientacao_cidadao").style.display  =  "none";                  
-                document.getElementsByName('radio_orientacao_cidadao').forEach( opcao => {opcao.checked = false;} );
-
-                document.getElementById("motivos_nao_contato").style.display  =  "";                   
-
-                document.getElementById("procurando_imovel").style.display  =  "none";  
-                document.getElementsByName('radio_procurando_imovel').forEach( opcao => {opcao.checked = false;} );
-
-                document.getElementById("instruir_cidadao").style.display  =  "none";   
-                document.getElementsByName('radio_instruir_cidadao').forEach( opcao => {opcao.checked = false;} );
-
-                document.getElementById("instrucoes").style.display  =  "none";    
-
-                document.getElementById("observacoes").style.display  =  "";           
-                break; 
-
-      case "2": // SIM
-
-                document.getElementById("orientacao_cidadao").style.display   =  "";  
-
-                document.getElementById("motivos_nao_contato").style.display  =  "none";  
-                document.getElementsByName('radio_motivos_nao_contato').forEach( opcao => {opcao.checked = false;} );
-
-                document.getElementById("procurando_imovel").style.display  =  "none";  
-                document.getElementsByName('radio_procurando_imovel').forEach( opcao => {opcao.checked = false;} );
-
-                document.getElementById("instruir_cidadao").style.display  =  "none";                   
-                document.getElementsByName('radio_instruir_cidadao').forEach( opcao => {opcao.checked = false;} );
-
-                document.getElementById("instrucoes").style.display  =  "none";  
-
-                document.getElementById("observacoes").style.display  =  "none";           
-                break;
-    }
-
-  } // Fim da função handlerChangeRadioContatoCidadao
-
-
-  
-  /**
-   * Mostra e esconde campos em função da opção selecionada no campo radio_orientacao_cidadao
-   */
-  function handlerChangeRadioOrientacaoCidadao() {
-
-    const valorRadio = document.querySelector('input[name="radio_orientacao_cidadao"]:checked').value;
-
-    switch( valorRadio ) {
-
-      case "1": // NÃO
-                document.getElementById("procurando_imovel").style.display    =  "none";  
-                document.getElementsByName('radio_procurando_imovel').forEach( opcao => {opcao.checked = false;} );
-
-                document.getElementById("instruir_cidadao").style.display     =  "";   
-                document.getElementById("instrucoes").style.display           =  "none";                       
-
-                document.getElementById("observacoes").style.display          =  "none";           
-                break; 
-
-      case "2": // SIM
-                document.getElementById("procurando_imovel").style.display    =  "";  
-                document.getElementById("instruir_cidadao").style.display     =  "none";  
-                document.getElementsByName('radio_instruir_cidadao').forEach( opcao => {opcao.checked = false;} ); 
-                document.getElementById("instrucoes").style.display           =  "none";   
-
-                document.getElementById("observacoes").style.display          =  "none";           
-                break;
-    }
-
-  } // Fim da função handlerChangeRadioOrientacaoCidadao
-
-
-  
-  /**
-   * Mostra e esconde campos em função da opção selecionada no campo procurando_imovel
-   */
-  function handlerChangeRadioProcurandoImovel() {
-
-    document.getElementById("observacoes").style.display  =  "";           
-
-  } // Fim da função handlerChangeRadioProcurandoImovel
-
-
-  
-  /**
-   * Mostra e esconde campos em função da opção selecionada no campo radio_instruir_cidadao
-   */
-  function handlerChangeRadioInstruirCidadao() {
-
-    const valorRadio = document.querySelector('input[name="radio_instruir_cidadao"]:checked').value;
+    const valorRadio = document.querySelector('input[name="radio_acompanhamento_beneficiario"]:checked').value;            
 
     switch( valorRadio ) {
 
       case "1": // NÃO
 
-                document.getElementById("instrucoes").style.display  =  "";                       
+                document.getElementById("acompanhamento_sim").style.display  =  "none";                  
+                document.getElementsByName('radio_acompanhamento_sim').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("acompanhamento_nao").style.display  =  "";                   
+
                 break; 
 
       case "2": // SIM
-                document.getElementById("instrucoes").style.display  =  "none";           
+
+                document.getElementById("acompanhamento_nao").style.display  =  "none";                  
+                document.getElementsByName('radio_acompanhamento_nao').forEach( opcao => {opcao.checked = false;} );
+
+                document.getElementById("acompanhamento_sim").style.display  =  "";                   
+       
                 break;
     }
 
-    document.getElementById("observacoes").style.display  =  "";           
+    document.getElementById("observacoes").style.display  =  "";   
 
-  } // Fim da função handlerChangeRadioInstruirCidadao
+  } // Fim da função handlerChangeRadio_acompanhamento_beneficiario
 
 
 
