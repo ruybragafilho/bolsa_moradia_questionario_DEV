@@ -11,7 +11,7 @@
 
     console.log( "\nindex_js - INÍCIO" );      
 
-    document.getElementById("acompanhamento_sim").style.display          =  "none";   
+    document.getElementById("etapa_acesso").style.display          =  "none";   
     document.getElementById("acompanhamento_nao").style.display          =  "none";   
     document.getElementById("impossibilidade_temporaria").style.display  =  "none";                   
     document.getElementById("nao_acesso_definitivo").style.display       =  "none";                  
@@ -35,8 +35,8 @@
       case "1": // NÃO
 
                 // Esconde campos referentes à opção SIM
-                document.getElementById("acompanhamento_sim").style.display  =  "none";                  
-                document.getElementsByName("radio_acompanhamento_sim").forEach( opcao => {opcao.checked = false;} );
+                document.getElementById("etapa_acesso").style.display  =  "none";                  
+                document.getElementsByName("radio_etapa_acesso").forEach( opcao => {opcao.checked = false;} );
 
                 document.getElementById("impossibilidade_temporaria").style.display  =  "none";                  
                 document.getElementsByName("radio_impossibilidade_temporaria").forEach( opcao => {opcao.checked = false;} );                
@@ -52,7 +52,7 @@
       case "2": // SIM
 
                 // Mostra campos referentes à opção SIM
-                document.getElementById("acompanhamento_sim").style.display  =  "";                   
+                document.getElementById("etapa_acesso").style.display  =  "";                   
 
                 // Esconde campo referente à opção Não
                 document.getElementById("acompanhamento_nao").style.display  =  "none";                  
@@ -68,11 +68,11 @@
 
 
   /**
-   * Mostra e esconde campos em função da opção selecionada no campo radio_acompanhamento_sim
+   * Mostra e esconde campos em função da opção selecionada no campo radio_etapa_acesso
    */     
-  function handlerChangeRadio_acompanhamento_sim() {
+  function handlerChangeRadio_etapa_acesso() {
 
-    const valorRadio = document.querySelector('input[name="radio_acompanhamento_sim"]:checked').value;            
+    const valorRadio = document.querySelector('input[name="radio_etapa_acesso"]:checked').value;            
 
     switch( valorRadio ) {
 
@@ -111,7 +111,53 @@
                 break;
     }
 
-  } // Fim da função handlerChangeRadio_acompanhamento_sim
+  } // Fim da função handlerChangeRadio_etapa_acesso
+
+
+
+  /**
+   * Handler do botão Salvar Questionário. Coleta as respostas do questionário e 
+   * chama a função frontend para salvar o questionário
+   */     
+  function handlerBotaoSalvarQuestionario() {
+    
+    const q1 = document.querySelector('input[name="radio_acompanhamento_beneficiario"]:checked') ?
+               document.querySelector('input[name="radio_acompanhamento_beneficiario"]:checked').value :
+               "";
+
+    const q2 = document.querySelector('input[name="radio_etapa_acesso"]:checked') ? 
+               document.querySelector('input[name="radio_etapa_acesso"]:checked').value : 
+               "";
+
+    const q3 = document.querySelector('input[name="radio_impossibilidade_temporaria"]:checked') ? 
+               document.querySelector('input[name="radio_impossibilidade_temporaria"]:checked').value : 
+               "";               
+
+    const q4 = document.querySelector('input[name="radio_nao_acesso_definitivo"]:checked') ? 
+               document.querySelector('input[name="radio_nao_acesso_definitivo"]:checked').value : 
+               "";               
+
+    const q5 = document.querySelector('input[name="radio_acompanhamento_nao"]:checked') ? 
+               document.querySelector('input[name="radio_acompanhamento_nao"]:checked').value : 
+               "";      
+               
+    const observacoes = document.getElementById("campo_observacoes").value;
+
+    const respostasQuestionario = {
+      "idCaso" : 1,
+      "q1" : q1,
+      "q2" : q2,
+      "q3" : q3,
+      "q4" : q4,
+      "q5" : q5,
+      "observacoes" : observacoes
+    };
+    
+
+    salvarQuestionarioFE( respostasQuestionario )
+
+  } // Fim da função handlerBotaoSalvarQuestionario
+
 
 
 </script>

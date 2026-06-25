@@ -30,8 +30,8 @@
     
         <!-- Título da Página - Início -->
         <section>
-          <h3 class="text-center fw-bold mt-4 mb-5" id="tituloPagina">BOLSA MORADIA - POP RUA</h3><br>
-          <h4 class="text-center mb-5">QUESTIONÁRIO</h4>          
+          <h3 class="text-center fw-bold mt-4 mb-3" id="tituloPagina">BOLSA MORADIA - POP RUA</h3><br>
+          <h4 class="text-center mb-3">QUESTIONÁRIO</h4>          
         </section>
         <!-- Título da Página - Fim -->
 
@@ -42,8 +42,8 @@
         <!-- Questionário - Início -->
         <section>    
 
-          <!-- Pergunta principal do questionário -->  
-          <div id="acompanhamento_beneficiario" class="mt-5">
+          <!-- Pergunta principal do questionário - Q1 -->  
+          <div id="acompanhamento_beneficiario" class="mt-3">
             <p id="label_acompanhamento_beneficiario" class="fw-bold">O beneficiário continua em acompanhamento por este serviço?</p>    
             <div id="radio_acompanhamento_beneficiario" onchange="handlerChangeRadio_acompanhamento_beneficiario()">
               <?!= gerarRadioButton( BUFFER_RESPOSTAS_SIMPLES, "radio_acompanhamento_beneficiario", 1 ); ?>
@@ -51,22 +51,24 @@
           </div> 
 
           
-          <!-- Acompanhamento SIM -->
-          <div id="acompanhamento_sim" class="mt-5">
-            <p id="label_acompanhamento_sim" class="fw-bold">Em qual etapa de acesso o beneficiário se encontra?</p>    
-            <div id="radio_acompanhamento_sim" onchange="handlerChangeRadio_acompanhamento_sim()">
-              <?!= gerarRadioButton( BUFFER_ACOMPANHAMENTO_SIM, "radio_acompanhamento_sim", 0 ); ?>
+          <!-- Acompanhamento SIM - Q2-->
+          <div id="etapa_acesso" class="mt-5">
+            <p id="label_etapa_acesso" class="fw-bold">Em qual etapa de acesso o beneficiário se encontra?</p>    
+            <div id="radio_etapa_acesso" onchange="handlerChangeRadio_etapa_acesso()">
+              <?!= gerarRadioButton( BUFFER_ETAPA_ACESSO, "radio_etapa_acesso", 0 ); ?>
             </div>        
           </div>
 
-          <div id="impossibilidade_temporaria" class="mt-3">
+          <!-- Q3-->
+          <div id="impossibilidade_temporaria" class="mt-5">
             <p id="label_impossibilidade_temporaria" class="fw-bold">Justificativa impossibilidade temporária</p>    
             <div id="radio_impossibilidade_temporaria">
               <?!= gerarRadioButton( BUFFER_IMPOSSIBILIDADE_TEMPORARIA, "radio_impossibilidade_temporaria", 0 ); ?>
             </div>        
           </div>          
 
-          <div id="nao_acesso_definitivo" class="mt-3">
+          <!-- Q4-->
+          <div id="nao_acesso_definitivo" class="mt-5">
             <p id="label_nao_acesso_definitivo" class="fw-bold">Justificativa não acesso definitivo</p>    
             <div id="radio_nao_acesso_definitivo">
               <?!= gerarRadioButton( BUFFER_NAO_ACESSO_DEFINITIVO, "radio_nao_acesso_definitivo", 0 ); ?>
@@ -74,7 +76,7 @@
           </div>                    
 
 
-          <!-- Acompanhamento NÃO -->
+          <!-- Acompanhamento NÃO - Q5 -->
           <div id="acompanhamento_nao" class="mt-5">
             <p id="label_acompanhamento_nao" class="fw-bold">Justificativa</p>    
             <div id="radio_acompanhamento_nao">
@@ -98,7 +100,7 @@
 
         <!-- Botão Salvar Questionário - Início -->        
         <section>
-          <button type="button" class="btn btn-primary mt-5 mb-5">Salvar Questionário</button>
+          <button type="button" class="btn btn-primary mt-5 mb-5" onclick="handlerBotaoSalvarQuestionario()">Salvar Questionário</button>
         </section>
         <!-- Botão Salvar Questionário - Fim -->        
         
@@ -116,6 +118,7 @@
 
     <!-- Chamadas de script -->    
     <?!= include("index_js"); ?>
+    <?!= include("salvarQuestionarioFE_js"); ?>
 
      
   </body>
