@@ -7,25 +7,34 @@ function monitorarCasos() {
 
   console.log( "monitorarCasos - Início" );      
 
-  let idCaso = 2;
-  let caso = BUFFER_FILA[idCaso-1];  
   
-  let situacaoCaso = getSituacaoCaso( idCaso );
-
-  let vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
-  let situacaoVistoria = getSituacaoVistoria( vistoriasCaso );
-
-  let situacaoQuestionario = getSituacaoQuestionario( idCaso );
-
-  console.log( "Situacao Caso: " + situacaoCaso );
-  console.log( "Situacao Vistoria: " + situacaoVistoria );
-  console.log( "Situacao Questionario: " + situacaoQuestionario );
+  let caso;
+  let situacaoCaso;
+  let vistoriasCaso;
+  let situacaoVistoria;
+  let situacaoQuestionario;
 
 
-  if(situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2") ) {
-    enviarEmailBE( idCaso );
-    salvarEnvioDeQuestionario( idCaso );
-  }
+  for( let idCaso=1; idCaso<=TAMANHO_FILA; ++idCaso ) {
+
+    caso = BUFFER_FILA[idCaso-1];  
+    
+    situacaoCaso = getSituacaoCaso( idCaso );  
+    vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
+    situacaoVistoria = getSituacaoVistoria( vistoriasCaso );  
+    situacaoQuestionario = getSituacaoQuestionario( idCaso );
+  
+    console.log( "idCaso: " + idCaso );
+    console.log( "Situacao Caso: " + situacaoCaso );
+    console.log( "Situacao Vistoria: " + situacaoVistoria );
+    console.log( "Situacao Questionario: " + situacaoQuestionario );  
+  
+    if(situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2") ) {
+      enviarEmailBE( idCaso );
+      salvarEnvioDeQuestionario( idCaso );
+    }
+
+  } // Fim for
 
   
   console.log( "monitorarCasos - Fim" );      

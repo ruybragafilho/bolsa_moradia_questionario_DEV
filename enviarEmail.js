@@ -38,10 +38,17 @@ function enviarEmailBE( idCaso ) {
   console.log( `idInstituicao: ${idInstituicao}` );  
   console.log( `emailInstituicao: ${emailInstituicao}` );  
   console.log( `emailOrgaoEncaminhador: ${emailOrgaoEncaminhador}` );  
-  console.log( `emails: ${emails.split(";")}` );  
-  
+  console.log( `emails: ${emails.join(";")}` );  
 
-/*
+
+  let linkAppBolsaMoradia;
+  if( emailInstituicao.includes( "@pbh.gov.br" ) ) {
+    linkAppBolsaMoradia = "https://script.google.com/a/macros/pbh.gov.br/s/AKfycby2peoZlAQWgXVh3LlMQ7YPmMuEWwtFpgnlte_tzf8j7ahfK7MCQ_WuoeB4oU041rqI/exec";
+  } else {
+    linkAppBolsaMoradia = "https://script.google.com/macros/s/AKfycbwYnRG-F7sEE-U5bajOJcHFFFXYtlfM6Q7DXdQlyPZZdBhr9i_fkcpK1mR8S6s10hSR/exec";
+  }
+
+
   try {
   
     MailApp.sendEmail({
@@ -52,10 +59,12 @@ function enviarEmailBE( idCaso ) {
       htmlBody:  
 `Prezado (a),<br><br>
 
-solicitamos que vocês acessem o sistema do Bolsa Moradia - Pop Rua para o preenchimento do questionário sobre a situação atual do acompanhamento, pelo serviço, do(a) beneficiário(a)  <b>${nomeRFCaso}</b>, CPF <b>${cpfRFCaso}</b><br>
+solicitamos que vocês acessem o sistema do Bolsa Moradia - Pop Rua, pelo <b>link</b> abaixo, para o preenchimento do questionário sobre a situação atual do acompanhamento, pelo serviço, do(a) beneficiário(a)  <b>${nomeRFCaso}</b>, CPF <b>${cpfRFCaso}</b><br><br>
 
+${linkAppBolsaMoradia}<br><br><br>
 
 Qualquer dúvida, procure a equipe da DPOP.<br><br>
+
 
 Equipe Bolsa Moradia | Diretoria de Políticas para População em Situação de Rua, Migrantes e Refugiados | DPOP<br>
 Secretaria Municipal de Assistência Social e Direitos Humanos | SMASDH<br>
@@ -71,7 +80,7 @@ Telefone: (31) 3277-6373 / 3277-9994 | pbh.gov.br      <br><br> `
     console.log( "enviarEmailBE - " + error.message );    
     throw( "enviarEmailBE - " + error.message );
 
-  }*/
+  }
 
   console.log( "enviarEmailBE - Início" );   
 
