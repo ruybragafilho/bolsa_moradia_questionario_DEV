@@ -24,11 +24,67 @@ const NUM_QUESTIONARIO     =  BUFFER_QUESTIONARIO.length;
  */
 const ID_CASO           = 0;
 
-const EMAIL_RESPONSAVEL_RESPOSTA = 1;
+const ID_TRABALHADOR_RESPONSAVEL_RESPOSTA = 1;
 const DATA_ENVIO_EMAIL_QUESTIONARIO = 2;
 const DATA_RESPOSTA_QUESTIONARIO = 3;
 const RESPOSTAS = 4;
 const OBSERVACAO = 5;
+
+
+
+
+/**
+ * Função backend que retorna a situação do questionário de um caso
+ *    1 - Sem questionário a responder
+ *    2 - Questionário enviado mas não respondido
+ *    3 - Questionário enviado e respondido
+ */       
+function getSituacaoQuestionario( idCaso ) {
+
+  console.log( "getSituacaoQuestionario - Início" );  
+
+  const id = parseInt( idCaso );
+
+  // Se id inválido, retorna uma exceção
+  if( id < 1  ||  id > TAMANHO_FILA ) {
+    throw( new Error( "getSituacaoQuestionario - ID Inválido" ) );
+  }    
+
+
+  let situacaoQuestionario;
+  
+  if( (BUFFER_QUESTIONARIO[id-1][DATA_ENVIO_EMAIL_QUESTIONARIO] === "") &&
+      (BUFFER_QUESTIONARIO[id-1][DATA_RESPOSTA_QUESTIONARIO] === "") ) {
+
+    // Sem questionário a responder
+    situacaoQuestionario = "1";  
+
+  } else if( (BUFFER_QUESTIONARIO[id-1][DATA_ENVIO_EMAIL_QUESTIONARIO] !== "") &&
+             (BUFFER_QUESTIONARIO[id-1][DATA_RESPOSTA_QUESTIONARIO] === "") ) {
+
+    // Questionário enviado mas não respondido
+    situacaoQuestionario = "2";                  
+
+  } else if( (BUFFER_QUESTIONARIO[id-1][DATA_ENVIO_EMAIL_QUESTIONARIO] !== "") &&
+             (BUFFER_QUESTIONARIO[id-1][DATA_RESPOSTA_QUESTIONARIO] !== "") ) {
+
+    // Questionário enviado e respondido
+    situacaoQuestionario = "3";                  
+    
+  }
+
+  console.log( "idCaso: " + idCaso );
+  console.log( "situacaoQuestionario: " + situacaoQuestionario );
+  console.log( "getSituacaoQuestionario - Fim" );    
+
+  return situacaoQuestionario;
+
+} // Fim da função getSituacaoQuestionario
+
+
+
+
+
 
 
 
