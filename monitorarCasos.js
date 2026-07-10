@@ -7,7 +7,7 @@ function monitorarCasos() {
 
   console.log( "monitorarCasos - Início" );      
 
-  let idCaso = 514;
+  let idCaso = 2;
   let caso = BUFFER_FILA[idCaso-1];  
   
   let situacaoCaso = getSituacaoCaso( idCaso );
@@ -23,7 +23,7 @@ function monitorarCasos() {
 
 
   if(situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2") ) {
-    console.log( "ENVIAR EMAIL" );  
+    enviarEmailBE( idCaso );
     salvarEnvioDeQuestionario( idCaso );
   }
 

@@ -13,6 +13,8 @@
  */
 function enviarEmailBE( idCaso ) {
 
+  console.log( "enviarEmailBE - Início" ); 
+
   
   const cpfRFCaso = (BUFFER_FILA[idCaso-1][CPF_RF]).padStart(11, "0");
   const nomeRFCaso = BUFFER_FILA[idCaso-1][REFERENCIA_FAMILIAR];
@@ -28,7 +30,18 @@ function enviarEmailBE( idCaso ) {
   if( isEmailValidBE(emailOrgaoEncaminhador) ) { emails.push(emailOrgaoEncaminhador) }
   
 
+  console.log( `idCaso: ${idCaso}` );  
+  console.log( `cpfRFCaso: ${cpfRFCaso}` );  
+  console.log( `nomeRFCaso: ${nomeRFCaso}` );  
 
+
+  console.log( `idInstituicao: ${idInstituicao}` );  
+  console.log( `emailInstituicao: ${emailInstituicao}` );  
+  console.log( `emailOrgaoEncaminhador: ${emailOrgaoEncaminhador}` );  
+  console.log( `emails: ${emails.split(";")}` );  
+  
+
+/*
   try {
   
     MailApp.sendEmail({
@@ -58,7 +71,9 @@ Telefone: (31) 3277-6373 / 3277-9994 | pbh.gov.br      <br><br> `
     console.log( "enviarEmailBE - " + error.message );    
     throw( "enviarEmailBE - " + error.message );
 
-  }
+  }*/
+
+  console.log( "enviarEmailBE - Início" );   
 
 } // Fim da função enviarEmailBE
 
@@ -73,13 +88,9 @@ Telefone: (31) 3277-6373 / 3277-9994 | pbh.gov.br      <br><br> `
  */
 function teste_enviarEmail() {
   
-  let enderecoEmail = "sigps@pbh.gov.br";
-  let cpfRFCaso = "111.222.333-44";
-  let nomeRFCaso = "João da Silva";
-  let evolucaoCaso = "evolução";
-  let mensagemDataLimite = "";
+  let idCaso = 4;
   
-  enviarEmailBE( enderecoEmail, cpfRFCaso, nomeRFCaso, evolucaoCaso, mensagemDataLimite );
+  enviarEmailBE( idCaso );
  
 }
 
