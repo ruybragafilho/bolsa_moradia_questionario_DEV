@@ -41,41 +41,27 @@ const OBSERVACAO = 5;
  */       
 function getSituacaoQuestionario( idCaso ) {
 
-  console.log( "getSituacaoQuestionario - Início" );  
-
-  const id = parseInt( idCaso );
-
-  // Se id inválido, retorna uma exceção
-  if( id < 1  ||  id > TAMANHO_FILA ) {
-    throw( new Error( "getSituacaoQuestionario - ID Inválido" ) );
-  }    
-
-
   let situacaoQuestionario;
   
-  if( (BUFFER_QUESTIONARIO[id-1][DATA_ENVIO_EMAIL_QUESTIONARIO] === "") &&
-      (BUFFER_QUESTIONARIO[id-1][DATA_RESPOSTA_QUESTIONARIO] === "") ) {
+  if( (BUFFER_QUESTIONARIO[idCaso-1][DATA_ENVIO_EMAIL_QUESTIONARIO] === "") &&
+      (BUFFER_QUESTIONARIO[idCaso-1][DATA_RESPOSTA_QUESTIONARIO] === "") ) {
 
     // Sem questionário a responder
     situacaoQuestionario = "1";  
 
-  } else if( (BUFFER_QUESTIONARIO[id-1][DATA_ENVIO_EMAIL_QUESTIONARIO] !== "") &&
-             (BUFFER_QUESTIONARIO[id-1][DATA_RESPOSTA_QUESTIONARIO] === "") ) {
+  } else if( (BUFFER_QUESTIONARIO[idCaso-1][DATA_ENVIO_EMAIL_QUESTIONARIO] !== "") &&
+             (BUFFER_QUESTIONARIO[idCaso-1][DATA_RESPOSTA_QUESTIONARIO] === "") ) {
 
     // Questionário enviado mas não respondido
     situacaoQuestionario = "2";                  
 
-  } else if( (BUFFER_QUESTIONARIO[id-1][DATA_ENVIO_EMAIL_QUESTIONARIO] !== "") &&
-             (BUFFER_QUESTIONARIO[id-1][DATA_RESPOSTA_QUESTIONARIO] !== "") ) {
+  } else if( (BUFFER_QUESTIONARIO[idCaso-1][DATA_ENVIO_EMAIL_QUESTIONARIO] !== "") &&
+             (BUFFER_QUESTIONARIO[idCaso-1][DATA_RESPOSTA_QUESTIONARIO] !== "") ) {
 
     // Questionário enviado e respondido
     situacaoQuestionario = "3";                  
     
   }
-
-  console.log( "idCaso: " + idCaso );
-  console.log( "situacaoQuestionario: " + situacaoQuestionario );
-  console.log( "getSituacaoQuestionario - Fim" );    
 
   return situacaoQuestionario;
 
@@ -83,85 +69,24 @@ function getSituacaoQuestionario( idCaso ) {
 
 
 
-
-
-
-
-
 /**
  * Função backend para salvar o questionário
  */       
-function salvarQuestionarioBE( jsonRespostasQuestionario ) {
-
-  // Prepara os dados para serem gravados na planilha QUESTIONARIO
-
-  const respostasQuestionario = JSON.parse( jsonRespostasQuestionario );
-
-  const idCaso = parseInt( respostasQuestionario.idCaso );
-
-  const repostas = [ respostasQuestionario.q1, 
-                       respostasQuestionario.q2, 
-                       respostasQuestionario.q3, 
-                       respostasQuestionario.q4, 
-                       respostasQuestionario.q5 ].join( ";" );
-
-  const observacoes = respostasQuestionario.observacoes;
-
-
-  // Grava os dados do questionário na planilha QUESTIONARIO
-
-  // TENTA PEGAR O LOCK
-  const lock = LockService.getScriptLock();    
+function salvarEnvioDeQuestionario( idCaso ) {
 
   try {
 
-    lock.waitLock(10000);  
-    
-    
-    // SE PEGAR O LOCK, PROSSEGUE COM A GRAVAÇÃO DOS DADOS DO QUESTIONÁRIO
-    if( lock.hasLock() ) {
-
-
-      // Gera, formata e grava a data de resposta do questionário
-      let dataResposta = new Date().toLocaleString("pt-BR", {dateStyle: "short"});    
-      const campo_data = TABELA_QUESTIONARIO.getRange( idCaso+1, DATA_RESPOSTA_QUESTIONARIO+1 );
-      campo_data.setValue( dataResposta );    
-      console.log( "\nsalvarQuestionarioBE - dataResposta" );
-      
-      // Grava os ids das respostas do questionário
-      const campo_Respostas = TABELA_QUESTIONARIO.getRange( idCaso+1, RESPOSTAS+1 );
-      campo_Respostas.setValue( repostas );      
-      console.log( "\nsalvarQuestionarioBE - repostas" );
-  
-      // Grava as observações do questionário
-      const campo_Observacoes = TABELA_QUESTIONARIO.getRange( idCaso+1, OBSERVACAO+1 );
-      campo_Observacoes.setValue( observacoes );      
-      console.log( "\nsalvarQuestionarioBE - observacoes" );
-
-
-      // Aguarda sincronização de dados
-      PLANILHA_QUESTIONARIO.waitForAllDataExecutionsCompletion(3);          
-      SpreadsheetApp.flush();    
-      
-    } else {
-  
-      // SE NAO CONSEGUIR PEGAR O LOCK, LANCA UMA EXCESSAO
-      throw( new Error( "salvarQuestionarioBE - Nao foi possivel pegar o LOCK" ) );
-    } 
-
+      // Gera, formata e grava a data de envio do questionário
+      let dataEnvio = new Date().toLocaleString("pt-BR", {dateStyle: "short"});    
+      const campo_data = TABELA_QUESTIONARIO.getRange( idCaso+1, DATA_ENVIO_EMAIL_QUESTIONARIO+1 );
+      campo_data.setValue( dataEnvio );  
 
   } catch( error ) {
 
     console.log( "salvarQuestionarioBE - " + error.message );
     throw( "salvarQuestionarioBE - " + error.message );
 
-  } finally {
+  }      
 
-    // Always release the lock for other waiting instances
-    lock.releaseLock(); 
-  }    
-
-  return true;
-
-  } // Fim da função salvarQuestionarioBE
+} // Fim da função salvarEnvioDeQuestionario
 

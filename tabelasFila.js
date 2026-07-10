@@ -62,13 +62,10 @@ const PERFIL_ORIENTACAO_SEXUAL   = 20;
 /**
  * Função backend que retorna a situação de um caso
  *    1 - Não convocado
- *    2 - Convocado e sem vistoria
- *    3 - Convocado e com vistoria
+ *    2 - Convocado
  */       
-function getSituacaoCasoNaFila( idCaso ) {
+function getSituacaoCaso( idCaso ) {
 
-  console.log( "getSituacaoCasoNaFila - Início" );
-  console.log( "idCaso: " + idCaso );
-  console.log( "getSituacaoCasoNaFila - Fim" );  
+  return BUFFER_FILA[idCaso-1][SITUACAO_BENEFICIO];
 
-} // Fim da função getSituacaoCasoNaFila
+} // Fim da função getSituacaoCaso

@@ -7,34 +7,40 @@
 
 
 /**
- * Função que envia um email para o endereço de e-mail informado
- *  
- * @param {String} enderecoEmail: enderecoEmail Endereço para onde o email será enviado
- * @param {String} cpfRFCaso: cpfRFCaso CPF do beneficiário do caso
- * @param {String} nomeRFCaso: nomeRFCaso Nome do beneficiário do caso
+ * Função que envia um email com o questionário 
+ *   
  * 
  */
-function enviarEmailBE( enderecoEmail, cpfRFCaso, nomeRFCaso ) {
+function enviarEmailBE( idCaso ) {
 
-  console.log("enderecoEmail: " + enderecoEmail);
-  console.log("cpfRFCaso: " + cpfRFCaso);
-  console.log("nomeRFCaso: " + nomeRFCaso);
-  console.log("evolucaoCaso: " + evolucaoCaso);
-  console.log("mensagemDataLimite: " + mensagemDataLimite);          
+  
+  const cpfRFCaso = (BUFFER_FILA[idCaso-1][CPF_RF]).padStart(11, "0");
+  const nomeRFCaso = BUFFER_FILA[idCaso-1][REFERENCIA_FAMILIAR];
+
+  
+  const idInstituicao = parseInt(BUFFER_FILA[idCaso-1][ORGAO_ENCAMINHADOR]);
+  const emailInstituicao = BUFFER_ORGAOS_ENCAMINHADORES[idInstituicao-1][EMAIL_INSTITUICAO];
+
+  const emailOrgaoEncaminhador = BUFFER_FILA[idCaso-1][EMAIL_ORGAO_ENCAMINHADOR];
+    
+  const emails = [];
+  if( isEmailValidBE(emailInstituicao) ) { emails.push(emailInstituicao) }
+  if( isEmailValidBE(emailOrgaoEncaminhador) ) { emails.push(emailOrgaoEncaminhador) }
+  
+
 
   try {
   
     MailApp.sendEmail({
   
-      to: `${enderecoEmail}`,
+      to: `${emails}`,
       cc: `ruybragafilho@gmail.com`,
-      subject: `Atualização benefício Bolsa Moradia - ${nomeRFCaso} - ${(new Date()).toLocaleString("pt-BR")}`,
+      subject: `Solicitação de Informação Bolsa Moradia - ${nomeRFCaso} - ${(new Date()).toLocaleString("pt-BR")}`,
       htmlBody:  
 `Prezado (a),<br><br>
 
-informamos que houve alteração no status do benefício de <b>${nomeRFCaso}</b>, CPF <b>${cpfRFCaso}</b>, para <b>${evolucaoCaso}</b>. Pedimos que verifique as informações no sistema e comunique ao beneficiado, se necessário.<br>
+solicitamos que vocês acessem o sistema do Bolsa Moradia - Pop Rua para o preenchimento do questionário sobre a situação atual do acompanhamento, pelo serviço, do(a) beneficiário(a)  <b>${nomeRFCaso}</b>, CPF <b>${cpfRFCaso}</b><br>
 
-${mensagemDataLimite}<br>
 
 Qualquer dúvida, procure a equipe da DPOP.<br><br>
 

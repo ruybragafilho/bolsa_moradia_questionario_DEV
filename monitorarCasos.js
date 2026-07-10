@@ -7,15 +7,27 @@ function monitorarCasos() {
 
   console.log( "monitorarCasos - Início" );      
 
-  let idCaso = 1;
-
+  let idCaso = 514;
   let caso = BUFFER_FILA[idCaso-1];  
-  console.log(caso);
+  
+  let situacaoCaso = getSituacaoCaso( idCaso );
 
-  getSituacaoCasoNaFila( idCaso );
+  let vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
+  let situacaoVistoria = getSituacaoVistoria( vistoriasCaso );
 
-  getSituacaoQuestionario( idCaso );
+  let situacaoQuestionario = getSituacaoQuestionario( idCaso );
 
+  console.log( "Situacao Caso: " + situacaoCaso );
+  console.log( "Situacao Vistoria: " + situacaoVistoria );
+  console.log( "Situacao Questionario: " + situacaoQuestionario );
+
+
+  if(situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2") ) {
+    console.log( "ENVIAR EMAIL" );  
+    salvarEnvioDeQuestionario( idCaso );
+  }
+
+  
   console.log( "monitorarCasos - Fim" );      
 
 } // Fim da função monitorarCasos
