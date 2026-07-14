@@ -79,7 +79,7 @@ function salvarEnvioDeQuestionario( idCaso ) {
       // Gera, formata e grava a data de envio do questionário
       let dataEnvio = new Date().toLocaleString("pt-BR", {dateStyle: "short"});    
       const campo_data = TABELA_QUESTIONARIO.getRange( idCaso+1, DATA_ENVIO_EMAIL_QUESTIONARIO+1 );
-      campo_data.setValue( dataEnvio );  
+      campo_data.setValue( dataEnvio );
 
   } catch( error ) {
 

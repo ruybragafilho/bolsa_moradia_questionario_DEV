@@ -14,27 +14,41 @@ function monitorarCasos() {
   let situacaoVistoria;
   let situacaoQuestionario;
 
+  let proposicao1;
+  let proposicao2;
 
-  for( let idCaso=1; idCaso<=TAMANHO_FILA; ++idCaso ) {
+  try {
 
-    caso = BUFFER_FILA[idCaso-1];  
+    for( let idCaso=1; idCaso<=TAMANHO_FILA; ++idCaso ) {
+  
+      caso = BUFFER_FILA[idCaso-1];  
+      
+      situacaoCaso = getSituacaoCaso( idCaso );  
+      vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
+      situacaoVistoria = getSituacaoVistoria( vistoriasCaso );  
+      situacaoQuestionario = getSituacaoQuestionario( idCaso );
+  
     
-    situacaoCaso = getSituacaoCaso( idCaso );  
-    vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
-    situacaoVistoria = getSituacaoVistoria( vistoriasCaso );  
-    situacaoQuestionario = getSituacaoQuestionario( idCaso );
+      // Casos convocados para acesso, sem movimentação de vistoria e sem questionário respondido
+      proposicao1 = situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2");
   
-    console.log( "idCaso: " + idCaso );
-    console.log( "Situacao Caso: " + situacaoCaso );
-    console.log( "Situacao Vistoria: " + situacaoVistoria );
-    console.log( "Situacao Questionario: " + situacaoQuestionario );  
+      // Casos ainda não convocados para acesso e sem questionário respondido
+      proposicao2 = (situacaoCaso == "2" || situacaoCaso == "7") && (situacaoQuestionario == "1" || situacaoQuestionario == "2");    
   
-    if(situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2") ) {
-      enviarEmailBE( idCaso );
-      salvarEnvioDeQuestionario( idCaso );
-    }
+      if( proposicao1 || proposicao2 ) {
+        enviarEmailBE( idCaso );
+        salvarEnvioDeQuestionario( idCaso );
+      }
+  
+    } // Fim for    
 
-  } // Fim for
+
+  } catch( error ) {
+
+    console.log( "monitorarCasos - " + error.message );    
+    throw( "monitorarCasos - " + error.message );
+
+  }
 
   
   console.log( "monitorarCasos - Fim" );      

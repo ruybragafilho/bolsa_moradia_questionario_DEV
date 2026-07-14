@@ -12,9 +12,6 @@
  * 
  */
 function enviarEmailBE( idCaso ) {
-
-  console.log( "enviarEmailBE - Início" ); 
-
   
   const cpfRFCaso = (BUFFER_FILA[idCaso-1][CPF_RF]).padStart(11, "0");
   const nomeRFCaso = BUFFER_FILA[idCaso-1][REFERENCIA_FAMILIAR];
@@ -29,16 +26,6 @@ function enviarEmailBE( idCaso ) {
   if( isEmailValidBE(emailInstituicao) ) { emails.push(emailInstituicao) }
   if( isEmailValidBE(emailOrgaoEncaminhador) ) { emails.push(emailOrgaoEncaminhador) }
   
-
-  console.log( `idCaso: ${idCaso}` );  
-  console.log( `cpfRFCaso: ${cpfRFCaso}` );  
-  console.log( `nomeRFCaso: ${nomeRFCaso}` );  
-
-
-  console.log( `idInstituicao: ${idInstituicao}` );  
-  console.log( `emailInstituicao: ${emailInstituicao}` );  
-  console.log( `emailOrgaoEncaminhador: ${emailOrgaoEncaminhador}` );  
-  console.log( `emails: ${emails.join(";")}` );  
 
 
   let linkAppBolsaMoradia;
@@ -72,8 +59,6 @@ Av. Afonso Pena, 342, 6º andar - Centro | Belo Horizonte/MG | CEP: 30130-001<br
 Telefone: (31) 3277-6373 / 3277-9994 | pbh.gov.br      <br><br> `
   
     });     
-
-    console.log("EMAIL ENVIADO");            
   
   } catch( error ) {
 
@@ -82,7 +67,6 @@ Telefone: (31) 3277-6373 / 3277-9994 | pbh.gov.br      <br><br> `
 
   }
 
-  console.log( "enviarEmailBE - Início" );   
 
 } // Fim da função enviarEmailBE
 
