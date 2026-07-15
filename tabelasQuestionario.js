@@ -90,3 +90,111 @@ function salvarEnvioDeQuestionario( idCaso ) {
 
 } // Fim da função salvarEnvioDeQuestionario
 
+
+
+/**
+ * Função backend que monitora os casos e, para os casos elegíveis, 
+ * envia email para as instituições com o link do questionário .
+ */
+function enviarNovosQuestionatios() {
+
+  console.log( "enviarNovosQuestionatios - Início" );      
+  
+  let caso;
+  let situacaoCaso;
+  let vistoriasCaso;
+  let situacaoVistoria;
+  let situacaoQuestionario;
+
+  let proposicao1;
+  let proposicao2;
+
+  try {
+
+    for( let idCaso=1; idCaso<=TAMANHO_FILA; ++idCaso ) {
+  
+      caso = BUFFER_FILA[idCaso-1];  
+      
+      situacaoCaso = getSituacaoCaso( idCaso );  
+      vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
+      situacaoVistoria = getSituacaoVistoria( vistoriasCaso );  
+      situacaoQuestionario = getSituacaoQuestionario( idCaso );  
+    
+      // Casos convocados para acesso, sem movimentação de vistoria e sem questionário respondido
+      proposicao1 = situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2");
+  
+      // Casos ainda não convocados para acesso e sem questionário respondido
+      proposicao2 = (situacaoCaso == "2" || situacaoCaso == "7") && (situacaoQuestionario == "1" || situacaoQuestionario == "2");    
+  
+      if( proposicao1 || proposicao2 ) {
+        enviarEmailBE( idCaso );
+        salvarEnvioDeQuestionario( idCaso );
+      }
+  
+    } // Fim for    
+
+  } catch( error ) {
+
+    console.log( "enviarNovosQuestionatios - " + error.message );    
+    throw( "enviarNovosQuestionatios - " + error.message );
+  }
+  
+  console.log( "enviarNovosQuestionatios - Fim" );      
+
+} // Fim da função enviarNovosQuestionatios
+
+
+
+/**
+ * Função backend que monitora os casos e , para os casos elegíveis, 
+ * envia email para as instituições com o link do questionário .
+ */
+function enviarLembretesQuestionatios() {
+
+  console.log( "enviarLembretesQuestionatios - Início" );      
+  
+  let caso;
+  let situacaoCaso;
+  let vistoriasCaso;
+  let situacaoVistoria;
+  let situacaoQuestionario;
+
+  let proposicao1;
+  let proposicao2;
+
+  try {
+
+    for( let idCaso=1; idCaso<=TAMANHO_FILA; ++idCaso ) {
+  
+      caso = BUFFER_FILA[idCaso-1];  
+      
+      situacaoCaso = getSituacaoCaso( idCaso );  
+      vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
+      situacaoVistoria = getSituacaoVistoria( vistoriasCaso );  
+      situacaoQuestionario = getSituacaoQuestionario( idCaso );
+      
+      // Casos convocados para acesso, sem movimentação de vistoria e sem questionário respondido
+      proposicao1 = situacaoCaso == "3" && situacaoVistoria == "" && situacaoQuestionario == "2";
+  
+      // Casos ainda não convocados para acesso e sem questionário respondido
+      proposicao2 = (situacaoCaso == "2" || situacaoCaso == "7") && (situacaoQuestionario == "2");    
+  
+      if( proposicao1 || proposicao2 ) {
+        enviarEmailBE( idCaso );
+      }
+  
+    } // Fim for    
+
+  } catch( error ) {
+
+    console.log( "enviarLembretesQuestionatios - " + error.message );    
+    throw( "enviarLembretesQuestionatios - " + error.message );
+  }
+  
+  console.log( "enviarLembretesQuestionatios - Fim" );      
+
+} // Fim da função enviarLembretesQuestionatios
+
+
+
+
