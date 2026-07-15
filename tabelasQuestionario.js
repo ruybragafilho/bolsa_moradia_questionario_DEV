@@ -96,9 +96,9 @@ function salvarEnvioDeQuestionario( idCaso ) {
  * Função backend que monitora os casos e, para os casos elegíveis, 
  * envia email para as instituições com o link do questionário .
  */
-function enviarNovosQuestionatios() {
+function enviarNovosQuestionarios() {
 
-  console.log( "enviarNovosQuestionatios - Início" );      
+  console.log( "enviarNovosQuestionarios - Início" );      
   
   let caso;
   let situacaoCaso;
@@ -135,13 +135,13 @@ function enviarNovosQuestionatios() {
 
   } catch( error ) {
 
-    console.log( "enviarNovosQuestionatios - " + error.message );    
-    throw( "enviarNovosQuestionatios - " + error.message );
+    console.log( "enviarNovosQuestionarios - " + error.message );    
+    throw( "enviarNovosQuestionarios - " + error.message );
   }
   
-  console.log( "enviarNovosQuestionatios - Fim" );      
+  console.log( "enviarNovosQuestionarios - Fim" );      
 
-} // Fim da função enviarNovosQuestionatios
+} // Fim da função enviarNovosQuestionarios
 
 
 
@@ -149,9 +149,9 @@ function enviarNovosQuestionatios() {
  * Função backend que monitora os casos e , para os casos elegíveis, 
  * envia email para as instituições com o link do questionário .
  */
-function enviarLembretesQuestionatios() {
+function enviarLembretesQuestionarios() {
 
-  console.log( "enviarLembretesQuestionatios - Início" );      
+  console.log( "enviarLembretesQuestionarios - Início" );      
   
   let caso;
   let situacaoCaso;
@@ -187,13 +187,13 @@ function enviarLembretesQuestionatios() {
 
   } catch( error ) {
 
-    console.log( "enviarLembretesQuestionatios - " + error.message );    
-    throw( "enviarLembretesQuestionatios - " + error.message );
+    console.log( "enviarLembretesQuestionarios - " + error.message );    
+    throw( "enviarLembretesQuestionarios - " + error.message );
   }
   
-  console.log( "enviarLembretesQuestionatios - Fim" );      
+  console.log( "enviarLembretesQuestionarios - Fim" );      
 
-} // Fim da função enviarLembretesQuestionatios
+} // Fim da função enviarLembretesQuestionarios
 
 
 
