@@ -27,13 +27,10 @@ function enviarEmailBE( idCaso ) {
   if( isEmailValidBE(emailOrgaoEncaminhador) ) { emails.push(emailOrgaoEncaminhador) }
   
 
+  let linkAppBolsaMoradiaPBH = "https://script.google.com/a/macros/pbh.gov.br/s/AKfycby2peoZlAQWgXVh3LlMQ7YPmMuEWwtFpgnlte_tzf8j7ahfK7MCQ_WuoeB4oU041rqI/exec";
 
-  let linkAppBolsaMoradia;
-  if( emailInstituicao.includes( "@pbh.gov.br" ) ) {
-    linkAppBolsaMoradia = "https://script.google.com/a/macros/pbh.gov.br/s/AKfycby2peoZlAQWgXVh3LlMQ7YPmMuEWwtFpgnlte_tzf8j7ahfK7MCQ_WuoeB4oU041rqI/exec";
-  } else {
-    linkAppBolsaMoradia = "https://script.google.com/macros/s/AKfycbwYnRG-F7sEE-U5bajOJcHFFFXYtlfM6Q7DXdQlyPZZdBhr9i_fkcpK1mR8S6s10hSR/exec";
-  }
+  let linkAppBolsaMoradiaGMAIL = "https://script.google.com/macros/s/AKfycbwYnRG-F7sEE-U5bajOJcHFFFXYtlfM6Q7DXdQlyPZZdBhr9i_fkcpK1mR8S6s10hSR/exec";
+
 
 
   try {
@@ -46,9 +43,15 @@ function enviarEmailBE( idCaso ) {
       htmlBody:  
 `Prezado (a),<br><br>
 
-solicitamos que vocês acessem o sistema do Bolsa Moradia - Pop Rua, pelo <b>link</b> abaixo, para o preenchimento do questionário sobre a situação atual do acompanhamento, pelo serviço, do(a) beneficiário(a)  <b>${nomeRFCaso}</b>, CPF <b>${cpfRFCaso}</b><br><br>
+solicitamos que vocês acessem o sistema do Bolsa Moradia - Pop Rua, pelos <b>links</b> abaixo, para o preenchimento do questionário sobre a situação atual do acompanhamento, pelo serviço, do(a) beneficiário(a)  <b>${nomeRFCaso}</b>, CPF <b>${cpfRFCaso}</b><br><br><br>
 
-${linkAppBolsaMoradia}<br><br><br>
+Link de acesso para instituições / trabalhadores com e-mail <b>@pbh.gov.br</b> <br><br>
+
+${linkAppBolsaMoradiaPBH}<br><br><br>
+
+Link de acesso para instituições / trabalhadores com e-mail <b>@gmail.com</b> <br><br>
+
+${linkAppBolsaMoradiaGMAIL}<br><br><br>
 
 Qualquer dúvida, procure a equipe da DPOP.<br><br>
 
