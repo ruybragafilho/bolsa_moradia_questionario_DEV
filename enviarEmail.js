@@ -45,13 +45,16 @@ function enviarEmailBE( idCaso ) {
 
 solicitamos que vocês acessem o sistema do Bolsa Moradia - Pop Rua, pelos <b>links</b> abaixo, para o preenchimento do questionário sobre a situação atual do acompanhamento, pelo serviço, do(a) beneficiário(a)  <b>${nomeRFCaso}</b>, CPF <b>${cpfRFCaso}</b><br><br><br>
 
+
 Link de acesso para instituições / trabalhadores com e-mail <b>@pbh.gov.br</b> <br><br>
 
 ${linkAppBolsaMoradiaPBH}<br><br><br>
 
+
 Link de acesso para instituições / trabalhadores com e-mail <b>@gmail.com</b> <br><br>
 
 ${linkAppBolsaMoradiaGMAIL}<br><br><br>
+
 
 Qualquer dúvida, procure a equipe da DPOP.<br><br>
 
