@@ -52,7 +52,7 @@ const OBSERVACAO                           =  5;
  *    2 - Questionário enviado mas não respondido
  *    3 - Questionário enviado e respondido
  */       
-function getSituacaoQuestionario( idCaso ) {
+function getSituacaoQuestionarioCaso( idCaso ) {
 
   let situacaoQuestionario;
   
@@ -78,7 +78,34 @@ function getSituacaoQuestionario( idCaso ) {
 
   return situacaoQuestionario;
 
-} // Fim da função getSituacaoQuestionario
+} // Fim da função getSituacaoQuestionarioCaso
+
+
+
+/**
+ * Função backend para habilitar o questionário de um caso
+ */       
+function habilitarQuestionarioCaso( idCaso ) {
+
+  try {
+
+      // Gera, formata e grava a data de envio do questionário
+      // Questionários com esse campo diferente de "", estarão habilitados
+      let dataEnvio = new Date().toLocaleString("pt-BR", {dateStyle: "short"});    
+      const campo_data = TABELA_QUESTIONARIO.getRange( idCaso+1, DATA_ENVIO_EMAIL_QUESTIONARIO+1 );
+      campo_data.setValue( dataEnvio );
+
+  } catch( error ) {
+
+    console.log( "habilitarQuestionarioCaso - " + error.message );
+    throw( "habilitarQuestionarioCaso - " + error.message );
+
+  }      
+
+} // Fim da função habilitarQuestionarioCaso
+
+
+
 
 
 
@@ -144,30 +171,6 @@ function limparQuestionarios() {
 
 
 /**
- * Função backend para habilitar o questionário de um caso
- */       
-function habilitarQuestionarioCaso( idCaso ) {
-
-  try {
-
-      // Gera, formata e grava a data de envio do questionário
-      // Questionários com esse campo diferente de "", estarão habilitados
-      let dataEnvio = new Date().toLocaleString("pt-BR", {dateStyle: "short"});    
-      const campo_data = TABELA_QUESTIONARIO.getRange( idCaso+1, DATA_ENVIO_EMAIL_QUESTIONARIO+1 );
-      campo_data.setValue( dataEnvio );
-
-  } catch( error ) {
-
-    console.log( "habilitarQuestionarioCaso - " + error.message );
-    throw( "habilitarQuestionarioCaso - " + error.message );
-
-  }      
-
-} // Fim da função habilitarQuestionarioCaso
-
-
-
-/**
  * Função backend que monitora os casos e, para os casos elegíveis, 
  * habilita o questionário. 
  */
@@ -203,7 +206,7 @@ function habilitarQuestionarios() {
         situacaoCaso = getSituacaoCaso( idCaso );  
         vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
         situacaoVistoria = getSituacaoVistoria( vistoriasCaso );  
-        situacaoQuestionario = getSituacaoQuestionario( idCaso );  
+        situacaoQuestionario = getSituacaoQuestionarioCaso( idCaso );  
       
         // Casos convocados para acesso, sem movimentação de vistoria e sem questionário respondido
         proposicao1 = situacaoCaso == "3" && situacaoVistoria == "" && (situacaoQuestionario == "1" || situacaoQuestionario == "2");
@@ -267,7 +270,7 @@ function enviarEmailsQuestionarios() {
       situacaoCaso = getSituacaoCaso( idCaso );  
       vistoriasCaso = pesquisarVistoriasPorCPF( caso[CPF_RF] );
       situacaoVistoria = getSituacaoVistoria( vistoriasCaso );  
-      situacaoQuestionario = getSituacaoQuestionario( idCaso );
+      situacaoQuestionario = getSituacaoQuestionarioCaso( idCaso );
       
       // Casos convocados para acesso, sem movimentação de vistoria e sem questionário respondido
       proposicao1 = situacaoCaso == "3" && situacaoVistoria == "" && situacaoQuestionario == "2";
@@ -296,9 +299,9 @@ function enviarEmailsQuestionarios() {
 /**
  * Função backend para enviar o último questionário para o histórico
  */       
-function enviarQuestionarioParaHistorico() {
+function enviarQuestionariosParaHistorico() {
 
-console.log( "enviarQuestionarioParaHistorico - Início" );      
+console.log( "enviarQuestionariosParaHistorico - Início" );      
 
   // Grava os dados do questionário na planilha HISTORICO
 
@@ -322,13 +325,13 @@ console.log( "enviarQuestionarioParaHistorico - Início" );
     } else {
   
       // SE NAO CONSEGUIR PEGAR O LOCK, LANCA UMA EXCESSAO
-      throw( new Error( "enviarQuestionarioParaHistorico - Nao foi possivel pegar o LOCK" ) );
+      throw( new Error( "enviarQuestionariosParaHistorico - Nao foi possivel pegar o LOCK" ) );
     } 
 
   } catch( error ) {
 
-    console.log( "enviarQuestionarioParaHistorico - " + error.message );
-    throw( "enviarQuestionarioParaHistorico - " + error.message );
+    console.log( "enviarQuestionariosParaHistorico - " + error.message );
+    throw( "enviarQuestionariosParaHistorico - " + error.message );
 
   } finally {
 
@@ -336,9 +339,9 @@ console.log( "enviarQuestionarioParaHistorico - Início" );
     lock.releaseLock(); 
   }     
 
-  console.log( "enviarQuestionarioParaHistorico - Fim" );      
+  console.log( "enviarQuestionariosParaHistorico - Fim" );      
 
-} // Fim da função enviarQuestionarioParaHistorico
+} // Fim da função enviarQuestionariosParaHistorico
 
 
 
