@@ -46,6 +46,9 @@ const OBSERVACAO                           =  5;
 
 
 
+// ####  FUNÇÕES AUXILIARES, QUE OPERAM SOBRE UM CASO ESPECÍFICO  ####
+
+
 /**
  * Função backend que retorna a situação do questionário de um caso
  *    1 - Sem questionário a responder
@@ -106,6 +109,56 @@ function habilitarQuestionarioCaso( idCaso ) {
 
 
 
+// ####  FUNÇÕES QUE OPERAM SOBRE AS LISTAS  ####
+
+
+
+/**
+ * Função backend para enviar o último questionário para o histórico
+ */       
+function enviarQuestionariosParaHistorico() {
+
+console.log( "enviarQuestionariosParaHistorico - Início" );      
+
+  // Grava os dados do questionário na planilha HISTORICO
+
+  // TENTA PEGAR O LOCK
+  const lock = LockService.getScriptLock();    
+
+  try {
+
+    lock.waitLock(10000);  
+    
+    
+    // SE PEGAR O LOCK, PROSSEGUE COM A GRAVAÇÃO DO QUESTIONÁRIO NO HISTÓRICO
+    if( lock.hasLock() ) {
+
+      const range = TABELA_HISTORICO.getRange( TAMANHO_HISTORICO+2, 1, TAMANHO_QUESTIONARIO, NUM_COLUNAS_TABELA_QUESTIONARIO );  
+      range.setValues( BUFFER_QUESTIONARIO );
+
+      PLANILHA_HISTORICO.waitForAllDataExecutionsCompletion(2);      
+      SpreadsheetApp.flush();  
+      
+    } else {
+  
+      // SE NAO CONSEGUIR PEGAR O LOCK, LANCA UMA EXCESSAO
+      throw( new Error( "enviarQuestionariosParaHistorico - Nao foi possivel pegar o LOCK" ) );
+    } 
+
+  } catch( error ) {
+
+    console.log( "enviarQuestionariosParaHistorico - " + error.message );
+    throw( "enviarQuestionariosParaHistorico - " + error.message );
+
+  } finally {
+
+    // Always release the lock for other waiting instances
+    lock.releaseLock(); 
+  }     
+
+  console.log( "enviarQuestionariosParaHistorico - Fim" );      
+
+} // Fim da função enviarQuestionariosParaHistorico
 
 
 
@@ -247,7 +300,7 @@ function habilitarQuestionarios() {
  * Função backend que monitora os casos e, para os casos elegíveis, 
  * envia email para as instituições com o link do questionário .
  */
-function enviarEmailsQuestionarios() {
+function enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso ) {
 
   console.log( "enviarEmailsQuestionarios - Início" );      
   
@@ -296,53 +349,18 @@ function enviarEmailsQuestionarios() {
 
 
 
-/**
- * Função backend para enviar o último questionário para o histórico
- */       
-function enviarQuestionariosParaHistorico() {
 
-console.log( "enviarQuestionariosParaHistorico - Início" );      
+function teste_enviarEmailsQuestionarios() {
 
-  // Grava os dados do questionário na planilha HISTORICO
+  console.log( "teste_enviarEmailsQuestionarios - Início" );      
 
-  // TENTA PEGAR O LOCK
-  const lock = LockService.getScriptLock();    
+  let idPrimeiroCaso = 1;
+  let idUltimoCaso = TAMANHO_FILA;
 
-  try {
+  enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso );
 
-    lock.waitLock(10000);  
-    
-    
-    // SE PEGAR O LOCK, PROSSEGUE COM A GRAVAÇÃO DO QUESTIONÁRIO NO HISTÓRICO
-    if( lock.hasLock() ) {
-
-      const range = TABELA_HISTORICO.getRange( TAMANHO_HISTORICO+2, 1, TAMANHO_QUESTIONARIO, NUM_COLUNAS_TABELA_QUESTIONARIO );  
-      range.setValues( BUFFER_QUESTIONARIO );
-
-      PLANILHA_HISTORICO.waitForAllDataExecutionsCompletion(2);      
-      SpreadsheetApp.flush();  
-      
-    } else {
-  
-      // SE NAO CONSEGUIR PEGAR O LOCK, LANCA UMA EXCESSAO
-      throw( new Error( "enviarQuestionariosParaHistorico - Nao foi possivel pegar o LOCK" ) );
-    } 
-
-  } catch( error ) {
-
-    console.log( "enviarQuestionariosParaHistorico - " + error.message );
-    throw( "enviarQuestionariosParaHistorico - " + error.message );
-
-  } finally {
-
-    // Always release the lock for other waiting instances
-    lock.releaseLock(); 
-  }     
-
-  console.log( "enviarQuestionariosParaHistorico - Fim" );      
-
-} // Fim da função enviarQuestionariosParaHistorico
-
+  console.log( "teste_enviarEmailsQuestionarios - Fim" );        
+}
 
 
 
