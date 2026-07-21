@@ -19,8 +19,8 @@ const BUFFER_TRIGGERS   =  TABELA_TRIGGERS.getDataRange().getDisplayValues().spl
 /**
  * Constantes que armazenam as posições das colunas da tabela TRIGGERS
  */
-const ID_CASO_INICIAL  =  0;
-const INCREMENTO_ID    =  1;
+const COLUNA_ID_CASO_INICIAL  =  0;
+const COLUNA_INCREMENTO_ID    =  1;
 
 
 
@@ -45,8 +45,8 @@ function trigger_enviarEmailsQuestionarios() {
 
     let flag_teto = false;
 
-    let idPrimeiroCaso = parseInt( BUFFER_TRIGGERS[0][ID_CASO_INICIAL] );
-    let incremento_id  = parseInt( BUFFER_TRIGGERS[0][INCREMENTO_ID] );
+    let idPrimeiroCaso = parseInt( BUFFER_TRIGGERS[0][COLUNA_ID_CASO_INICIAL] );
+    let incremento_id  = parseInt( BUFFER_TRIGGERS[0][COLUNA_INCREMENTO_ID] );
 
     console.log( "idPrimeiroCaso: " + idPrimeiroCaso );
     console.log( "incremento_id:  " + incremento_id );
@@ -61,10 +61,8 @@ function trigger_enviarEmailsQuestionarios() {
 
     // Grava, na tabela TRIGGERS, o ID do próximo elemento inicial
     let proximo_idPrimeiroCaso = flag_teto ? "1" : parseInt( idUltimoCaso ) + 1;
-    const campo_id_caso_inicial = TABELA_TRIGGERS.getRange( 2, ID_CASO_INICIAL+1 );
+    const campo_id_caso_inicial = TABELA_TRIGGERS.getRange( 2, COLUNA_ID_CASO_INICIAL+1 );
     campo_id_caso_inicial.setValue( proximo_idPrimeiroCaso );    
-
-
 
   } catch( error ) {
     console.log( "trigger_enviarEmailsQuestionarios_1_100 - " + error.message );

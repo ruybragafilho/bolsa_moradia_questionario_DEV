@@ -366,7 +366,6 @@ function enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso ) {
     }
 
 
-
   } catch( error ) {
 
     console.log( "enviarEmailsQuestionarios - " + error.message );    
