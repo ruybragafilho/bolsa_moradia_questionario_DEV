@@ -51,12 +51,15 @@ function trigger_enviarEmailsQuestionarios() {
     console.log( "idPrimeiroCaso: " + idPrimeiroCaso );
     console.log( "incremento_id:  " + incremento_id );
     
-    let soma = idPrimeiroCaso + incremento_id;
-    if( soma >= TAMANHO_FILA ) flag_teto = true;
-    console.log( "soma:      " + soma );
-    console.log( "flag_teto: " + flag_teto );
+    let idUltimoCaso = idPrimeiroCaso + incremento_id - 1;
+    
+    if( idUltimoCaso >= TAMANHO_FILA ) { 
+      flag_teto = true;
+      idUltimoCaso = TAMANHO_FILA;
+    }
+    console.log( "idUltimoCaso: " + idUltimoCaso );
+    console.log( "flag_teto:    " + flag_teto );
 
-    let idUltimoCaso = flag_teto ? TAMANHO_FILA : soma;    
     enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso );    
 
     // Grava, na tabela TRIGGERS, o ID do próximo elemento inicial
