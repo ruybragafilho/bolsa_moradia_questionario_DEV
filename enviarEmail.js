@@ -7,24 +7,24 @@
 
 
 /**
- * Função que envia um email com o questionário 
- *   
- * 
+ * Função que envia um email com o questionário  
  */
 function enviarEmailBE( idCaso ) {
   
   const cpfRFCaso = (BUFFER_FILA[idCaso-1][CPF_RF]).padStart(11, "0");
   const nomeRFCaso = BUFFER_FILA[idCaso-1][REFERENCIA_FAMILIAR];
-
-  
-  const idInstituicao = parseInt(BUFFER_FILA[idCaso-1][ORGAO_ENCAMINHADOR]);
+   
+  //const idInstituicao = parseInt(BUFFER_FILA[idCaso-1][ORGAO_ENCAMINHADOR]);
+  const servicosReferenciaCaso = obterServicosReferenciaDoCaso( idCaso );
+  const servicoReferenciaAtivo = obterServicoReferenciaAtivo(servicosReferenciaCaso);
+  const idInstituicao = servicoReferenciaAtivo.idServico;
   const emailInstituicao = BUFFER_ORGAOS_ENCAMINHADORES[idInstituicao-1][EMAIL_INSTITUICAO];
 
-  const emailOrgaoEncaminhador = BUFFER_FILA[idCaso-1][EMAIL_ORGAO_ENCAMINHADOR];
+//  const emailOrgaoEncaminhador = BUFFER_FILA[idCaso-1][EMAIL_ORGAO_ENCAMINHADOR];
     
   const emails = [];
   if( isEmailValidBE(emailInstituicao) ) { emails.push(emailInstituicao) }
-  if( isEmailValidBE(emailOrgaoEncaminhador) ) { emails.push(emailOrgaoEncaminhador) }
+//  if( isEmailValidBE(emailOrgaoEncaminhador) ) { emails.push(emailOrgaoEncaminhador) }
   
 
   let linkAppBolsaMoradiaPBH = "https://script.google.com/a/macros/pbh.gov.br/s/AKfycby2peoZlAQWgXVh3LlMQ7YPmMuEWwtFpgnlte_tzf8j7ahfK7MCQ_WuoeB4oU041rqI/exec";
