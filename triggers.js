@@ -25,20 +25,6 @@ const COLUNA_INCREMENTO_ID    =  1;
 
 
 
-function teste_enviarEmailsQuestionarios() {
-
-  console.log( "teste_enviarEmailsQuestionarios - Fim" );      
-
-  let idPrimeiroCaso = 1;
-  let idUltimoCaso = TAMANHO_FILA;
-
-  enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso );
-
-  console.log( "teste_enviarEmailsQuestionarios - Fim" );        
-}
-
-
-
 function trigger_enviarEmailsQuestionarios() {
 
   try {
@@ -68,7 +54,7 @@ function trigger_enviarEmailsQuestionarios() {
     campo_id_caso_inicial.setValue( proximo_idPrimeiroCaso );    
 
   } catch( error ) {
-    console.log( "trigger_enviarEmailsQuestionarios_1_100 - " + error.message );
+    console.log( "trigger_enviarEmailsQuestionarios - " + error.message );
   }
 
 } // trigger_enviarEmailsQuestionarios

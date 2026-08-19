@@ -15,7 +15,7 @@ const PLANILHA_FILA           =  SpreadsheetApp.openById(PLANILHA_FILA_ID);
 const TABELA_FILA             =  PLANILHA_FILA.getSheetByName('FILA');
 let BUFFER_FILA               =  TABELA_FILA.getDataRange().getDisplayValues().splice(1);
 let TAMANHO_FILA              =  BUFFER_FILA.length;
-const NUM_COLUNAS_TABELA_FILA =  18;
+const NUM_COLUNAS_TABELA_FILA =  20;
 
 function refreshBufferFila() {
   BUFFER_FILA  =  TABELA_FILA.getDataRange().getDisplayValues().splice(1);
@@ -42,12 +42,11 @@ const TEMPO_SITUACAO_DE_RUA      = 11;
 const SITUACAO_BENEFICIO         = 12;
 const DATA_ULTIMA_EVOLUCAO       = 13;
 const DOC_PENDENTE               = 14;
-const EMAIL_ORGAO_ENCAMINHADOR   = 15;
-const DATA_LIMITE                = 16;
-const JUSTIFICATIVA_ALTERACAO_DATA_LIMITE = 17;
-const PERFIL_COMPLETO            = 18;
-const PERFIL_GENERO              = 19;
-const PERFIL_ORIENTACAO_SEXUAL   = 20;
+const DATA_LIMITE                = 15;
+const JUSTIFICATIVA_ALTERACAO_DATA_LIMITE = 16;
+const PERFIL_COMPLETO            = 17;
+const PERFIL_GENERO              = 18;
+const PERFIL_ORIENTACAO_SEXUAL   = 19;
 
 
 

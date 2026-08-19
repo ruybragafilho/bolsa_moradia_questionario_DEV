@@ -79,7 +79,6 @@ function obterServicosReferenciaDoCaso( idCaso ) {
   let id;
   let BUFFER_INDICE;
   let BUFFER_RELACIONAMENTO;
-  let TAMANHO_RELACIONAMENTO;
   let ID_MAXIMO;      
   
 
@@ -119,10 +118,10 @@ function obterServicosReferenciaDoCaso( idCaso ) {
       relacionamento = BUFFER_RELACIONAMENTO[ parseInt(ir) - 1 ];
       servicosReferencia.push(
         {         
-          idServico: relacionamento[ID_SERVICO_RELACIONAMENTO],
-          dataInformacao: relacionamento[DATA_INFORMACAO],
-          idResponsavelInformacao: relacionamento[ID_RESPONSAVEL_INFORMACAO], 
-          emailResponsavelInformacao: emailUsuario( relacionamento[ID_RESPONSAVEL_INFORMACAO] )
+          idServico: relacionamento[ID_SERVICO_RELACIONAMENTO] //,
+//          dataInformacao: relacionamento[DATA_INFORMACAO],
+//          idResponsavelInformacao: relacionamento[ID_RESPONSAVEL_INFORMACAO],
+//          emailResponsavelInformacao: emailUsuario( relacionamento[ID_RESPONSAVEL_INFORMACAO] )
         }
       );
     }

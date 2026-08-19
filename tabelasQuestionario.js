@@ -2,7 +2,21 @@
 
 /**
  * Módulo:    tabelasQuestionario.gs
- * Objetivo:  Armazenar a tabela principal do sistema Bolsa Moradia - Questionário
+ * Objetivo:  Armazenar as tabelas e as funções de do sistema de disparo de questionários do Bolsa Moradia - Pop Rua
+ * 
+ * Sequência correta de execução das funções
+ *  
+ *     1) enviarQuestionariosParaHistorico();   // Salva as respostas do questionário anterior na tabela HISTORICO_QUESTIONARIO
+ * 
+ *     2) limparQuestionarios();   // Limpa a tabela que armazena o questionário atual - tabela QUESTIONARIO
+ * 
+ *     3) habilitarQuestionarios();   // Varre os casos para determinar quais deverão responder o questionário
+ *                                    // e registra essa informação na tabela QUESTIONARIO
+ * 
+ *     4) enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso );   // Envia e-mails com os questionários para os casos 
+ *                                                                     // habilitados pelo passo anterior e com ID dentro do 
+ *                                                                     // intervalo ( idPrimeiroCaso, idUltimoCaso )
+ *                                                                     // ESSA FUNÇÃO É CHAMADA PELO TRIGGER (não deve ser chamada diretamente)
  */
 
 
@@ -376,6 +390,19 @@ function enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso ) {
 
 } // Fim da função enviarEmailsQuestionarios
 
+
+
+function teste_enviarEmailsQuestionarios() {
+
+  console.log( "teste_enviarEmailsQuestionarios - Fim" );      
+
+  let idPrimeiroCaso = 1;
+  let idUltimoCaso = TAMANHO_FILA;
+
+  enviarEmailsQuestionarios( idPrimeiroCaso, idUltimoCaso );
+
+  console.log( "teste_enviarEmailsQuestionarios - Fim" );        
+}
 
 
 
