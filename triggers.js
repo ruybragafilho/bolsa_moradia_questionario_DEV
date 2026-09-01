@@ -9,7 +9,7 @@
 /**
  * Planilha QUESTIONARIO
  */
-const PLANILHA_TRIGGERS_ID  =  "1yMbF1bZocuymtyLWeJdpzpFMs1sr_Q2Ezv68KRivzT0";
+const PLANILHA_TRIGGERS_ID  =  PropertiesService.getScriptProperties().getProperty('PLANILHA_TRIGGERS_ID');
 const PLANILHA_TRIGGERS     =  SpreadsheetApp.openById(PLANILHA_TRIGGERS_ID);
 
 const TABELA_TRIGGERS   =  PLANILHA_TRIGGERS.getSheetByName('TRIGGERS');

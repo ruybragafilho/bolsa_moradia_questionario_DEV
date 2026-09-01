@@ -10,7 +10,7 @@
 /**
  * Planilha FILA
  */
-const PLANILHA_FILA_ID        =  "1ByVMN2V9bk_yQTPu1TFXz4KuobKO59-aOEY7JZAUYg0";
+const PLANILHA_FILA_ID        =  PropertiesService.getScriptProperties().getProperty('PLANILHA_FILA_ID');
 const PLANILHA_FILA           =  SpreadsheetApp.openById(PLANILHA_FILA_ID);
 const TABELA_FILA             =  PLANILHA_FILA.getSheetByName('FILA');
 let BUFFER_FILA               =  TABELA_FILA.getDataRange().getDisplayValues().splice(1);
